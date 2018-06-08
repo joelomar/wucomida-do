@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+	<head>
+		<title>wuComida</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="assets/js/angular.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/food-home.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/form.css" />
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="website/index.html" style="text-decoration: none;">
+									<!--<img src="images/logo.png" height="65" width="200" style="margin-top:15px"/>-->
+									<p id="logo_font">wucomida</p>
+
+								</a>
+								<!--<div id="mic" onclick="micFunc()" style="Float: right; margin: 27px 0px 0px 0px; border-radius: 100px; background: #ffffff; width: 35px; height: 35px; box-shadow: 0px 0px 2px grey;"></div>-->
+								<br>
+								<br>
+
+						</div>
+					</header>
+                     
+					<br>
+					<br>
+					<br>
+					<br>
+                    <p style="text-align: center; font-size: 14px;">¡Bienvenido!</p>
+
+                 <!-- Main -->
+					<div id="main">
+						<div class="inner">
+							
+							
+
+										<div id="all_results" ng-app="orderApp" ng-controller="ctrl">
+
+                        
+                            
+                                           <ul ng-repeat="x in serverData | orderBy: '-' | limitTo: 40">
+                                          	 
+                            <li style="background-color:#e6eeff; border-bottom: 6px solid #ff0080; padding-left: 10px; font-weight: bold;">{{ x.restaurant }}</li>
+                            <li style="padding-left: 10px;">ciudad: {{ x.city }}</li>
+                            <li style="background-color:#e6eeff; border-radius: 3px; padding-left: 10px;">direccion:  {{ x.adress }}</li>
+                            <a style="padding-left: 10px;" ng-href="{{ x.phone }}">tel: {{ x.phone }}</a>
+                            <li style="background-color:#e6eeff; border-radius: 3px; padding-left: 10px;">categoria: {{ x.category }}</li>
+                            <a style="padding-left: 10px;" ng-href="{{ x.link }}">wulink: {{ x.link }}</a>
+                            <li style="background-color:#e6eeff; border-radius: 3px; padding-left: 10px;">concepto: {{ x.concept }}</li>
+                            <li style="padding-left: 10px;">feedback: {{ x.feedback }}</li>
+                            <br>
+                            
+                         </ul>
+                                       
+                                           
+                    </div>
+										
+									
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<!--Wahtever here-->
+							</section>
+							<section>
+								<!--Wahtever here-->
+							</section>
+							<ul class="copyright">
+								<li></li><li></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			
+
+	</body>
+</html>

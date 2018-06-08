@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Register</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/form.css" />
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/register.js"></script>
+	    <script src="assets/js/jquery.min.js"></script>
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body style="background: #ff0080">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					
+						<div class="inner">
+
+							<!-- Logo -->
+								<!--<a href="index.html" class="logos">
+									<img src="images/logo.jpg" alt="" />
+								</a>-->
+								
+
+						</div>
+					</header>
+                    <div id="brakes">
+                    <br>
+					<br>	
+                    </div>
+          <p id="logo_font" style="text-align: center; color: #ffffff; font-size: 40px; margin-bottom: 19px; margin-top: 2px;">wucomida</p>
+					<form id="forms"> 
+
+                             <div>
+                                  <p></p>
+                              <!--<img src="img_avatar2.png" alt="wuComida" class="avatar">-->
+                             </div>
+
+                             <div class="container">
+                                  nombre:<br>
+                                  <input type="text" id="user_name" required>
+                                  apellido:<br>
+                                  <input type="text" id="user_last" required>
+                                  nombre del negocio:<br>
+                                  <input type="text" id="user_service" required>
+                                  email:<br>
+                                  <input type="text" id="user_email" required>
+                                  password:<br>
+                                  <input type="password" id="user_pass" required>
+                                  telefono:<br>
+                                  <input type="text" id="user_phone" required>
+
+                                  <button type="button" onclick="getUsersData()">registrar</button>
+                                  
+                            </div>
+
+                            <!--<div class="container" style="background-color:#f1f1f1">
+                                <button type="button" class="cancelbtn" onclick="cancelBut()">Cancelar</button>
+                                <span class="psw">Forgot <a href="#">password?</a></span>
+                            </div>-->
+                        </form>
+
+
+                     
+
+				<!-- Footer -->
+					<footer id="footer" style="background: #ff0080">
+						
+					</footer>
+
+			</div>
+
+			
+
+	</body>
+</html>

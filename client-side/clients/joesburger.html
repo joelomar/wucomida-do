@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Joe's Burger</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/form.css" />
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="assets/js/joesburger.js"></script>
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<!--<a href="index.html" class="logos">
+									<img src="images/logo.jpg" alt="" />-->
+									<a href="http://wucomida.com" style="text-decoration: none;">
+								        <p id="logo_font">wucomida</p>
+								</a>
+								<br>
+								<br>
+
+						</div>
+					</header>
+                    <br>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							
+							<p id="text_" style="margin-top: 100px; text-align: center; color: #ff0080;">Joe's Burgers | Martes a Domingo, 10:00am a 11:00pm</p>
+							<div id="text_on" style="text-align: center; color: #00ff00; display:none;">Abierto para ordenes</div>
+							<div id="text_off" style="text-align: center; color: red;">Cerrado para ordenes</div>
+							<!--<span class="image main"><img src="images/pic13.jpg" alt="" /></span>-->
+                            <!--<p><strong>Paga con tarjeta:</strong> Debito / Credito / ATH movil</p>-->
+                            <br>
+                            <div id="logo-holder" style="display: none; margin-top:-25px;"><p id="logo_font" style="text-align:center; font-size: 40px;">wucomida</p></div>
+                            <div id="text-holder" style="display: none; color: white; text-align: center; margin-top:-25px">Hamburger con papas fritas y refresco de 14oz.  $8.99</div>
+							<div id="options_box">
+							<!--<input type="radio" value="cash" id="cash">Cash-->
+							<br>
+							<form id="forms">
+                                
+                                <input type="checkbox" value="deli" id="deli" style="margin: 15px 0px 15px 20px">delivery
+							    <input type="checkbox" value="pick" id="pick">pick-up
+							    <input type="checkbox" value="credit" id="credit">credito
+							    <input type="checkbox" value="debit" id="debit">debito
+							   
+							    <input type="checkbox" value="ath" id="ath">ath movil
+                            <div class="container">
+                                  nombre:<br>
+                                  <input type="text" id="order_name" required>
+                                  telefono<br>
+                                  <input type="text" id="phone" required>
+                                  descripción:<br>
+                                  <input type="text" id="description">
+                                  <button type="button" onclick="placeOrder()">Proceder</button>
+                                  
+                            </div>
+
+                            <div class="container">
+                                <button type="button" class="cancelbtn" onclick="cancelBut()">cancelar</button>
+                                <!--<span class="psw">Forgot <a href="#">password?</a></span>-->
+                            </div>
+                            </form>
+                            </div>
+						
+
+
+
+
+
+							<div id="ath_box">	
+							<img src="images\movil.png" alt="ATH" width="98" height="70">
+                               <form>
+                                <!--<input type="text" id="phone" placeholder="telefono" required>
+                                 <br>
+                                <input type="text" id="name" placeholder="nombre" required>
+                                 <br>
+                                <input type="submit" value="cargar" onclick="sendDataToServer()">-->
+                                <p><strong>Num. de Envio:</strong><br>787-654-9876<br><strong>Total:</strong><br>$6.99<br><strong>Num. de Orden</strong><br>8765</p>
+                               <div style="color:red">*Nota: Para que su orden sea procesada, el total y numero de orden tienen que estar correctos.<br>El numero de orden se escribira como mensaje*</div>
+                               <button onclick="sendDataToServer()" id="button">Listo</button>
+                               </form>
+                            </div>
+
+
+                            <div id="credit_box">
+                            	<p style="text-align:center; color:#ffffff; font-size:12px;">Esta aplicación utiliza protocolos de seguridad TSL/SSL con Let's Encrypt y Stripe Secure Protocols</p>
+                             <form action="/charge" method="POST">
+                                 <script
+                                     
+                                      src = "https://checkout.stripe.com/checkout.js" class = "stripe-button"
+                                      data-key = "pk_test_2h865lQipdKltkMsYbGVrMe3"
+                                      data-amount = "899"
+                                      data-name = "Joes Burger"
+                                      data-description = "Combo #1, Doble chees burger with fries"
+                                      data-locale = "auto"
+                                      data-currency = "usd">
+                                 
+                                     
+                                 </script> 	
+                                 <input type="hidden" name="chargeAmount" value="899">
+                              </form>
+                            </div>
+
+
+                            <div id="debit_box">
+                            	<p style="text-align:center; color:#ffffff; font-size:12px;">Esta aplicación esta usa protocolos de seguridad de TSL/SSL con Let's Encrypt y Stripe Secure Protocols</p>
+                              <form action="/charge" method="POST">
+                                 <script
+                                     
+                                      src = "https://checkout.stripe.com/checkout.js"
+                                      class = "stripe-button"
+                                      data-key = "pk_test_2h865lQipdKltkMsYbGVrMe3"
+                                      data-amount = "5000"
+                                      data-name = "Joes Burger"
+                                      data-description = "Combo #1, Doble chees burger with fries"
+                                      data-locale = "auto"
+                                      data-currency = "usd">
+                                 
+                                     
+                                 </script> 	
+                                 <input type="hidden" name="chargeAmount" value="5000">
+                              </form>
+                            </div>
+
+                        <div id="menu-text">
+							<p id="menu-text-1" style="color: #ff0080;">Hambuerger con papas fritas y refrecos 14oz <strong>$8.99</strong><br><button onclick="orderOne()" type="button" id="button">Ordenar</button> </p>
+                            <p style="color: #ff0080;">Doble Bacon con papas fritas y refrecos 14oz <strong>$8.99</strong><br><button onclick="orderTwo()"type="button" id="button">Ordenar</button></p></p>
+							<p style="color: #ff0080;">Ribs Burger con papas fritas y refrecos 16oz <strong>$11.99</strong><br><button onclick="orderThree()"type="button" id="button">Ordenar</button></p></p>
+							<p style="color: #ff0080;">Big Sampler con refrecos 14oz <strong>$15.99</strong><br><button onclick="orderFour()"type="button" id="button">Ordenar</button></p>
+							<p style="color: #ff0080;">Burger Minis con un 6-pack de Medallas <strong>$12.99</strong><br><button type="button" id="button">Ordenar</button></p></p>
+							<p style="color: #ff0080;">Kids Menu con papas fritas y refrecos 11oz <strong>$4.99</strong><br><button type="button" id="button">Ordenar</button></p></p>
+					
+                         </div>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								
+							</section>
+							<section>
+								
+							</section>
+							<ul class="copyright">
+								<li></li><li></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
