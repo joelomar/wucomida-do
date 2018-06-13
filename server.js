@@ -219,7 +219,7 @@ exports.user01SendLog = function () {
 
 //-------------Routes
 
-app.use(express.static('client-side'));
+app.use(express.static('certbot-dir'));
 app.use(express.static('client-side/website'));
 app.use(express.static('client-side/software'));
 app.use(express.static('client-side/food-submit'));
