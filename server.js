@@ -1,25 +1,56 @@
-//const https = require('https'),
-      //fs = require('fs'),
-const express = require('express'),
+const https = require('https'),
+      http = require('http'),
+      express = require('express'),
       app = express(),
-      httpServer = require('http').Server(app),
-      io = require('socket.io')(httpServer),
+      fs = require('fs'),
+      forceDomain = require('forcedomain'),
       bodyParser = require('body-parser'),
       stripe = require('stripe')('sk_test_uNksu3KtCIQoApOlI3pyoQpE'),
       database = require('./database');
 
-/*var options = { cert: fs.readFileSinc(''), 
-                key: fs.readFileSinc('')
-
-};*/
 
 
-httpServer.listen(80, function() {
+
+var options = { cert: fs.readFileSync('/etc/letsencrypt/live/wucomida.com/fullchain.pem'),
+                key: fs.readFileSync('/etc/letsencrypt/live/wucomida.com/privkey.pem')
+
+};
+
+
+
+
+http.createServer(app).listen(80, function (req, res) {
+
     console.log('http Server Listening in PORT 80');
 });
 
 
-//https.createServer(options, app).listen(443);
+
+/*https.createServer(options, app).listen(443, function() {
+
+    console.log('Https server running atport 443');
+
+});*/
+
+
+var secureServer = https.createServer(options, app);
+
+secureServer.listen(443, function() {
+
+    console.log('https server running at port 443')
+
+});
+
+
+
+app.use(forceDomain({
+  hostname: 'www.wucomida.com',
+  protocol: 'https'
+
+}));
+
+
+var io = require('socket.io').listen(secureServer);
 
 
 
@@ -219,7 +250,6 @@ exports.user01SendLog = function () {
 
 //-------------Routes
 
-app.use(express.static('certbot-dir'));
 app.use(express.static('client-side/website'));
 app.use(express.static('client-side/software'));
 app.use(express.static('client-side/food-submit'));
